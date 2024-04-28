@@ -65,12 +65,19 @@ export default function TabOneScreen() {
     setPredValue(null);
   };
 
+  const handleNext = () => {
+    // Logic for handling next action
+    console.log("Next button clicked");
+  };
+
+  const handleTips = () => {
+    // Logic for handling tips action
+    console.log("Tips button clicked");
+  };
+
   return (
     <View style={styles.container}>
-      {loading && <ActivityIndicator style={styles.loadingIndicator} size="large" color="#0000ff" />}
-      {predValue !== null && (
-        <Text style={styles.predictionText}>Predicted Value: {predValue}</Text>
-      )}
+   
 
       <Text style={styles.sectionTitle}>Enter Patient Diabetes Data</Text>
       <View style={styles.inputContainer}>
@@ -132,10 +139,24 @@ export default function TabOneScreen() {
         />
       </View>
 
+      {loading && <ActivityIndicator style={styles.loadingIndicator} size="large" color="#0000ff" />}
+      {predValue !== null && (
+        <Text style={styles.predictionText}>Predicted Value: {predValue}</Text>
+      )}
+
+
       <View style={styles.buttonContainer}>
+      {predValue && predValue.toLowerCase() === "diabetes positive" ? (
+          <Button title="Next " onPress={handleNext} />
+        ) : (
+          <Button title="Tips" onPress={handleTips} />
+        )}
         <Button title="Predict" onPress={handleSubmit} />
         <Button title="Clear Inputs" onPress={handleClearInputs} />
       </View>
+
+
+
     </View>
   );
 }
